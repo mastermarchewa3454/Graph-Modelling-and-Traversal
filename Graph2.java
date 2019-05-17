@@ -39,10 +39,11 @@ public class Graph2
     private Text[] text = new Text[5];
     private LinkedList<Line> lineList = new LinkedList<Line>();
 
-    GameArena arena = new GameArena(widthArena, heightArena, createWindow);
+    
 
     public Graph2()
     {
+        GameArena arena = new GameArena(widthArena, heightArena, createWindow);
         ball[0] = new Ball(500,250, size_ball ,color);
         ball[1] = new Ball(750,400, size_ball ,color);
         ball[2] = new Ball(400,650, size_ball ,color); 
