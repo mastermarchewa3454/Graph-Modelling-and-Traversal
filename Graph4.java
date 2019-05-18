@@ -28,7 +28,7 @@ import java.awt.event.WindowEvent;
 public class Graph4
 {
     private Ball[] ball = new Ball[10];
-   
+    private Text[] text = new Text[5];
 
     public Graph4()
     {
@@ -48,11 +48,11 @@ public class Graph4
             arena.addBall(ball[i]);
         }
 
-        Text textJ = new Text("J",ball[0].getXPosition(),ball[0].getYPosition(), g.getTextSize(), g.getTextColor() );
-        Text textK = new Text("K",ball[1].getXPosition(),ball[1].getYPosition(), g.getTextSize(), g.getTextColor() );
-        Text textM = new Text("M",ball[2].getXPosition(),ball[2].getYPosition(), g.getTextSize(), g.getTextColor() );
-        Text textL = new Text("L",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
-
+        text[0] = new Text("J",ball[0].getXPosition(),ball[0].getYPosition(), g.getTextSize(), g.getTextColor() );
+        text[1] = new Text("K",ball[1].getXPosition(),ball[1].getYPosition(), g.getTextSize(), g.getTextColor() );
+        text[2] = new Text("M",ball[2].getXPosition(),ball[2].getYPosition(), g.getTextSize(), g.getTextColor() );
+        text[3] = new Text("L",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
+        /*
         Line lineLJ = new Line (ball[3].getXPosition(), ball[3].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor());
         Line lineML = new Line (ball[2].getXPosition(), ball[2].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor());
         Line lineKM = new Line (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor());
@@ -62,7 +62,8 @@ public class Graph4
         arena.addLine(lineML);
         arena.addLine(lineKM);
         arena.addLine(lineJK);
-
+        */
+        
         Arrow arrowKK = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         Arrow arrowLL = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         Arrow arrowLJ = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
@@ -75,24 +76,10 @@ public class Graph4
         for (int i= 0; i<4; i++)
         {
             arena.addBall(ball[i]);
-            if(i==0)
-            {
-                arena.addText(textJ);
-            }
-            if(i==1)
-            {
-                arena.addText(textK);
-            }
-            if(i==2)
-            {
-                arena.addText(textM);
-            }
-            if(i==3)
-            {
-                arena.addText(textL);
-            }
+            arena.addText(text[i]);
             arena.update();
         }
+        
     }
     public static void main(String[] args)
     {

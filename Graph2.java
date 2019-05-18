@@ -50,9 +50,9 @@ public class Graph2
         Text textH = new Text("H",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
         Text textI = new Text("I",ball[4].getXPosition(),ball[4].getYPosition(), g.getTextSize(), g.getTextColor() );
 
-        for (int i=0; i<5; i++)
+        for (int i=0; i<ball.length; i++)
         {
-            for (int j=0; j<4; j++)
+            for (int j=0; j<ball.length-1; j++)
             {
                 line [i][j] = new Line (ball[i].getXPosition(), ball[i].getYPosition(), ball[j].getXPosition(), ball[j].getYPosition(), g.getWidthLine(), g.getTextColor());
                 arena.addLine(line[i][j]);
@@ -60,7 +60,7 @@ public class Graph2
         }
         arena.update();
 
-        for (int i= 0; i<5; i++)
+        for (int i= 0; i<ball.length; i++)
         {
             arena.addBall(ball[i]);
             if(i==0)
