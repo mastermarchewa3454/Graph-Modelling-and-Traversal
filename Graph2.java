@@ -26,14 +26,7 @@ import java.awt.event.WindowEvent;
 
 public class Graph2
 {
-    private int widthArena = 1000;
-    private int heightArena = 1000;
-    private int text_size = 35;
-    private int widthLine = 5;
-    private String text_color = "#fffafa";
-    private int size_ball = 40;
-    private String color = "#FF0000";
-    private boolean createWindow = true;
+
     private Ball[] ball = new Ball[5];
     private Line[][] line = new Line[5][5];
     private Text[] text = new Text[5];
@@ -43,25 +36,25 @@ public class Graph2
 
     public Graph2()
     {
-        GameArena arena = new GameArena(widthArena, heightArena, createWindow);
-        ball[0] = new Ball(500,250, size_ball ,color);
-        ball[1] = new Ball(750,400, size_ball ,color);
-        ball[2] = new Ball(400,650, size_ball ,color); 
-        ball[3] = new Ball(600,650, size_ball ,color);
-        ball[4] = new Ball(250,400, size_ball ,color);
+        GInfo g = new GInfo();
+        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+        ball[0] = new Ball(500,250, g.getSizeBall() ,g.getBallColor());
+        ball[1] = new Ball(750,400, g.getSizeBall() ,g.getBallColor());
+        ball[2] = new Ball(400,650, g.getSizeBall() ,g.getBallColor()); 
+        ball[3] = new Ball(600,650, g.getSizeBall() ,g.getBallColor());
+        ball[4] = new Ball(250,400, g.getSizeBall() ,g.getBallColor());
 
-        Text textE = new Text("E",ball[0].getXPosition(),ball[0].getYPosition(), text_size, text_color );
-        Text textF = new Text("F",ball[1].getXPosition(),ball[1].getYPosition(), text_size, text_color );
-        Text textG = new Text("G",ball[2].getXPosition(),ball[2].getYPosition(), text_size, text_color );
-        Text textH = new Text("H",ball[3].getXPosition(),ball[3].getYPosition(), text_size, text_color );
-        Text textI = new Text("I",ball[4].getXPosition(),ball[4].getYPosition(), text_size, text_color );
+        Text textE = new Text("E",ball[0].getXPosition(),ball[0].getYPosition(), g.getTextSize(), g.getTextColor() );
+        Text textF = new Text("F",ball[1].getXPosition(),ball[1].getYPosition(), g.getTextSize(), g.getTextColor() );
+        Text textG = new Text("G",ball[2].getXPosition(),ball[2].getYPosition(), g.getTextSize(), g.getTextColor() );
+        Text textH = new Text("H",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
+        Text textI = new Text("I",ball[4].getXPosition(),ball[4].getYPosition(), g.getTextSize(), g.getTextColor() );
 
-        //Line lineEF = new Line (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), widthLine, text_color);
         for (int i=0; i<5; i++)
         {
             for (int j=0; j<4; j++)
             {
-                line [i][j] = new Line (ball[i].getXPosition(), ball[i].getYPosition(), ball[j].getXPosition(), ball[j].getYPosition(), widthLine, text_color);
+                line [i][j] = new Line (ball[i].getXPosition(), ball[i].getYPosition(), ball[j].getXPosition(), ball[j].getYPosition(), g.getWidthLine(), g.getTextColor());
                 arena.addLine(line[i][j]);
             }
         }

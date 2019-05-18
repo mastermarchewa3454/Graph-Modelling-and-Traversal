@@ -164,7 +164,7 @@ public class Arrow
         yEnd = endY;
         width = w;
         colour = col;
-        arrowHeadLength = 20.0;
+        arrowHeadLength = 15.0;
 
         // Create three line instances - initially equal, but then update two to form the head of the arrow.
         for (int i=0; i<line.length; i++)
@@ -173,7 +173,7 @@ public class Arrow
             arena.addLine(line[i]);
         }
 
-        setArrowHeadPosition(100.0);
+        setArrowHeadPosition(90.0);
     }    
 
     /**
