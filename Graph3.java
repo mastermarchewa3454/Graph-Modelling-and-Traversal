@@ -27,17 +27,18 @@ import java.awt.event.WindowEvent;
     
 public class Graph3
 {
+    private Directed direct = new Directed(4);
     private Ball[] ball = new Ball[5];
-   
+    private GInfo g = new GInfo();
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
 
     public Graph3()
     {
-        GInfo g = new GInfo();
-        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
-        ball[0] = new Ball(400,200, g.getSizeBall(),g.getBallColor());
-        ball[1] = new Ball(575,400, g.getSizeBall(),g.getBallColor());
-        ball[2] = new Ball(400,700, g.getSizeBall() ,g.getBallColor()); 
-        ball[3] = new Ball(225,400, g.getSizeBall() ,g.getBallColor());
+        
+        ball[0] = new Ball(400,150, g.getSizeBall(),g.getBallColor());
+        ball[1] = new Ball(600,400, g.getSizeBall(),g.getBallColor());
+        ball[2] = new Ball(400,750, g.getSizeBall() ,g.getBallColor()); 
+        ball[3] = new Ball(200,400, g.getSizeBall() ,g.getBallColor());
         
         Text textJ = new Text("J",ball[0].getXPosition(),ball[0].getYPosition(), g.getTextSize(), g.getTextColor() );
         Text textK = new Text("K",ball[1].getXPosition(),ball[1].getYPosition(), g.getTextSize(), g.getTextColor() );
@@ -55,12 +56,15 @@ public class Graph3
         arena.addLine(lineLM);
         arena.addLine(lineMJ);
         */
-        
-        Arrow arrowJK = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowKl = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowLM = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowMJ = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
 
+       // Arrow arrowJK = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+       // Arrow arrowKl = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+       // Arrow arrowLM = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+       // Arrow arrowMJ = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        direct.directedLink(ball[0], ball[3], arena);
+        direct.directedLink(ball[3], ball[2], arena);
+        direct.directedLink(ball[2], ball[1], arena);
+        direct.directedLink(ball[1], ball[0], arena);
 
         arena.update();
 

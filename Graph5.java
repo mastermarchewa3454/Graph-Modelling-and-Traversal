@@ -35,6 +35,8 @@ public class Graph5
     {
         GInfo g = new GInfo();
         GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+        Directed direct = new Directed(6);
+
         ball[0] = new Ball(500,180, g.getSizeBall(),g.getBallColor());
         ball[1] = new Ball(125,220, g.getSizeBall(),g.getBallColor());
         ball[2] = new Ball(775,230, g.getSizeBall(),g.getBallColor());
@@ -55,17 +57,16 @@ public class Graph5
         text[4] = new Text("4",ball[4].getXPosition(),ball[4].getYPosition(), g.getTextSize(), g.getTextColor() );
         text[5] = new Text("5",ball[5].getXPosition(),ball[5].getYPosition(), g.getTextSize(), g.getTextColor() );
 
-        Arrow arrow01 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         
-        Arrow arrow02 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition()-g.getForDouble(), ball[2].getXPosition(), ball[2].getYPosition()-g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow13 = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow24 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[4].getXPosition(), ball[4].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow20 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition()+g.getForDouble(), ball[0].getXPosition(), ball[0].getYPosition()+g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow41 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow42 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow43 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow45 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow55 = new Arrow (ball[5].getXPosition(), ball[5].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        direct.directedLink(ball[0],ball[1], arena);
+        direct.directedLink(ball[0],ball[2], arena);
+        direct.directedLink(ball[1],ball[3], arena);
+        direct.directedLink(ball[2],ball[4], arena);
+        direct.directedLink(ball[2],ball[0], arena);
+        direct.directedLink(ball[4],ball[1], arena);
+        direct.directedLink(ball[4],ball[2], arena);
+        direct.directedLink(ball[4],ball[3], arena);
+        direct.directedLink(ball[4],ball[5], arena);
 
         for (int i=0; i<=5; i++)
         {
@@ -75,6 +76,36 @@ public class Graph5
             
             arena.update();
         }
+
+        direct.addEdge(0,1);
+        direct.addEdge(0,2);
+        direct.addEdge(1,3);
+        direct.addEdge(2,4);
+        direct.addEdge(2,0);
+        direct.addEdge(4,1);
+        direct.addEdge(4,2);
+        direct.addEdge(4,3);
+        direct.addEdge(4,5);
+        direct.addEdge(5,5);
+        System.out.println("Breadth First Traversal (started from 4)");
+        direct.BreadthFirst(4, ball, arena);
+        arena.update();
+
+
+
+        /*
+        Arrow arrow01 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow02 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition()-g.getForDouble(), ball[2].getXPosition(), ball[2].getYPosition()-g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow13 = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow24 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[4].getXPosition(), ball[4].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow20 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition()+g.getForDouble(), ball[0].getXPosition(), ball[0].getYPosition()+g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow41 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow42 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow43 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow45 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        Arrow arrow55 = new Arrow (ball[5].getXPosition(), ball[5].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+        */
+        
     }
 
     public static void main(String[] args)

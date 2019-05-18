@@ -1,5 +1,3 @@
-import com.sun.prism.paint.Color;
-
 public class GInfo
 {
     private int widthArena = 1000;
