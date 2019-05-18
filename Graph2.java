@@ -37,6 +37,7 @@ public class Graph2
     public Graph2()
     {
         GInfo g = new GInfo();
+        UnDirected un = new UnDirected();
         GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
         ball[0] = new Ball(500,250, g.getSizeBall() ,g.getBallColor());
         ball[1] = new Ball(750,400, g.getSizeBall() ,g.getBallColor());
@@ -54,8 +55,7 @@ public class Graph2
         {
             for (int j=0; j<ball.length-1; j++)
             {
-                line [i][j] = new Line (ball[i].getXPosition(), ball[i].getYPosition(), ball[j].getXPosition(), ball[j].getYPosition(), g.getWidthLine(), g.getTextColor());
-                arena.addLine(line[i][j]);
+                un.unDirected(ball[i], ball[j], arena);
             }
         }
         arena.update();

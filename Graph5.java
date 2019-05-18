@@ -67,18 +67,6 @@ public class Graph5
         Arrow arrow45 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         Arrow arrow55 = new Arrow (ball[5].getXPosition(), ball[5].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
 
-        lineList.add(arrow01);
-        lineList.add(arrow02);
-        lineList.add(arrow13);
-        lineList.add(arrow24);
-        lineList.add(arrow20);
-        linelist.add(arrow41);
-        linelist.add(arrow42);
-        linelist.add(arrow43);
-        linelist.add(arrow45);
-        linelist.add(arrow55);
-
-
         for (int i=0; i<=5; i++)
         {
             arena.addBall(ball[i]);

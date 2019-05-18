@@ -52,18 +52,7 @@ public class Graph4
         text[1] = new Text("K",ball[1].getXPosition(),ball[1].getYPosition(), g.getTextSize(), g.getTextColor() );
         text[2] = new Text("M",ball[2].getXPosition(),ball[2].getYPosition(), g.getTextSize(), g.getTextColor() );
         text[3] = new Text("L",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
-        /*
-        Line lineLJ = new Line (ball[3].getXPosition(), ball[3].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor());
-        Line lineML = new Line (ball[2].getXPosition(), ball[2].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor());
-        Line lineKM = new Line (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor());
-        Line lineJK = new Line (ball[0].getXPosition()+g.getForDouble(), ball[0].getYPosition()-g.getForDouble(), ball[1].getXPosition()+g.getForDouble(), ball[1].getYPosition()-g.getForDouble(), g.getWidthLine(), g.getTextColor());
-        
-        arena.addLine(lineLJ);
-        arena.addLine(lineML);
-        arena.addLine(lineKM);
-        arena.addLine(lineJK);
-        */
-        
+       
         Arrow arrowKK = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         Arrow arrowLL = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
         Arrow arrowLJ = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
