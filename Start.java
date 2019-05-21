@@ -24,74 +24,82 @@ import javax.swing.*;
 public class Start
 {
     private GInfo g = new GInfo();
-    private Rectangle[] rec = new Rectangle[6];
+    private Rectangle[] rec = new Rectangle[7];
     private Text[] text = new Text[6];
     private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
     private Rectangle cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
-    
+    private SetMenu menu = new SetMenu(); 
+    private int[] isExist = new int[8];
     public Start()
     {
-        Text textintro = new Text("Choose the graph you would like to see",50,100,45, g.getTextColor() );
-        arena.addText(textintro);
+        menu.SetMenu(arena, rec, text);
         arena.update();
-        rec[1] = new Rectangle(200,250,g.getRecWidth(), g.getRecHeight(),"#FFD700");
-        rec[2] = new Rectangle(200,500,g.getRecWidth(), g.getRecHeight(),"#FFD700");
-        rec[3] = new Rectangle(200,750,g.getRecWidth(), g.getRecHeight(),"#FFD700");
-        rec[4] = new Rectangle(700,250,g.getRecWidth(), g.getRecHeight(),"#FFD700");
-        rec[5] = new Rectangle(700,500,g.getRecWidth(), g.getRecHeight(),"#FFD700");
-       // rec[5] = new Rectangle(700,750,g.getRecWidth(), g.getRecHeight(),"#FFD700");
 
-        arena.addRectangle(rec[1]);
-        arena.addRectangle(rec[2]);
-        arena.addRectangle(rec[3]);
-        arena.addRectangle(rec[4]);
-        arena.addRectangle(rec[5]);
-       // arena.addRectangle(rec[5]);
-
-        text[0] = new Text("Graph 1",rec[1].getXPosition()-50,rec[1].getYPosition(), g.getTextSize()+10, g.getTextColor() );
-        text[1] = new Text("Graph 2",rec[2].getXPosition()-50,rec[2].getYPosition(), g.getTextSize()+10, g.getTextColor() );
-        text[2] = new Text("Graph 3",rec[3].getXPosition()-50,rec[3].getYPosition(), g.getTextSize()+10, g.getTextColor() );
-        text[3] = new Text("Graph 4",rec[4].getXPosition()-50,rec[4].getYPosition(), g.getTextSize()+10, g.getTextColor() );
-        text[4] = new Text("Graph 5",rec[5].getXPosition()-50,rec[5].getYPosition(), g.getTextSize()+10, g.getTextColor() );
-     // text[5] = new Text("Graph 6",rec[5].getXPosition()-50,rec[5].getYPosition(), g.getTextSize()+10, g.getTextColor());
-        arena.addText(text[0]);
-        arena.addText(text[1]);
-        arena.addText(text[2]);
-        arena.addText(text[3]);
-        arena.addText(text[4]);
-       // arena.addText(text[5]);
-
-        
-
+        for (int i=1; i<=rec.length; i++)
+            {
+                isExist[i] = 0;
+            }
         while(true)
         {
             arena.update();
-            if(arena.leftMousePressed() && Math.abs(rec[1].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[1].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            if(arena.leftMousePressed() && Math.abs(rec[1].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[1].getYPosition()-arena.getMouseY())<g.getRecHeight() && isExist[1] == 0)
             {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
                 arena.addRectangle(cov);
-                Graph graph = new Graph(arena);     
+                Graph graph = new Graph(arena);
+                isExist[1] = 1;
+                arena.addRectangle(rec[6]); 
+                arena.addText(text[5]);         
             }
-            else if(arena.leftMousePressed() && Math.abs(rec[2].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[2].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            if(arena.leftMousePressed() && Math.abs(rec[2].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[2].getYPosition()-arena.getMouseY())<g.getRecHeight() && isExist[2] == 0)
             {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
                 arena.addRectangle(cov);
-                Graph2 graph2 = new Graph2(arena);     
+                Graph2 graph2 = new Graph2(arena);
+                isExist[2] = 1;
+                arena.addRectangle(rec[6]);
+                arena.addText(text[5]);          
             }
-            else if(arena.leftMousePressed() && Math.abs(rec[3].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[3].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            if(arena.leftMousePressed() && Math.abs(rec[3].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[3].getYPosition()-arena.getMouseY())<g.getRecHeight() && isExist[3] == 0)
             {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
                 arena.addRectangle(cov);
-                Graph3 graph3 = new Graph3(arena);     
+                Graph3 graph3 = new Graph3(arena);
+                isExist[3] = 1; 
+                arena.addRectangle(rec[6]); 
+                arena.addText(text[5]);        
             }
-            else if(arena.leftMousePressed() && Math.abs(rec[4].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[4].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            if(arena.leftMousePressed() && Math.abs(rec[4].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[4].getYPosition()-arena.getMouseY())<g.getRecHeight() && isExist[4] == 0)
             {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
                 arena.addRectangle(cov);
-                Graph4 graph4 = new Graph4(arena);     
+                Graph4 graph4 = new Graph4(arena);
+                isExist[4] = 1; 
+                arena.addRectangle(rec[6]);
+                arena.addText(text[5]);          
             }
-            else if(arena.leftMousePressed() && Math.abs(rec[5].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[5].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            if(arena.leftMousePressed() && Math.abs(rec[5].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[5].getYPosition()-arena.getMouseY())<g.getRecHeight() && isExist[5] == 0)
             {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
                 arena.addRectangle(cov);
-                Graph5 graph5 = new Graph5(arena);     
+                Graph5 graph5 = new Graph5(arena);
+                isExist[5] = 1; 
+                arena.addRectangle(rec[6]); 
+                arena.addText(text[5]);         
             }
-            
+            else if(arena.leftMousePressed() && Math.abs(rec[6].getXPosition()-arena.getMouseX())<g.getRecWidth() && Math.abs(rec[6].getYPosition()-arena.getMouseY())<g.getRecHeight())
+            {
+                cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
+                arena.addRectangle(cov);
+                
+                for (int i=1; i<=rec.length; i++)
+                {
+                    isExist[i] = 0;
+                }
+                menu.SetMenu(arena, rec, text);
+                arena.update();
+            }
+
             else if(arena.spacePressed())
             {
                 arena.exit();
@@ -99,10 +107,11 @@ public class Start
             
         }        
 
-
+        
 
 
     }
+   
     public static void main(String[] args)
     {
         Start game = new Start();

@@ -31,8 +31,8 @@ public class Graph
     
     private Ball[] ball = new Ball[5];
     private LinkedList<Line> lineList = new LinkedList<Line>();
-        GInfo g = new GInfo();
-        UnDirected un = new UnDirected();
+    private GInfo g = new GInfo();
+    private UnDirected un = new UnDirected();
     private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
  
     public Graph(GameArena arena)
@@ -52,20 +52,7 @@ public class Graph
         un.unDirected(ball[0], ball[2], arena);
         un.unDirected(ball[2], ball[3], arena);
         un.unDirected(ball[1], ball[3], arena);
-       // Line lineAB = new Line (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor());
-     //   Line lineAC = new Line (ball[0].getXPosition(), ball[0].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor());
-     //   Line lineCD = new Line (ball[2].getXPosition(), ball[2].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor());
-      //  Line lineBD = new Line (ball[1].getXPosition(), ball[1].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor());
-          
-      //  lineList.add(lineAB);
-     //   lineList.add(lineAC);
-     //   lineList.add(lineCD);
-       // lineList.add(lineBD);
-
-       // arena.addLine(lineAB);
-       // arena.addLine(lineAC);
-       // arena.addLine(lineCD);
-       // arena.addLine(lineBD);
+ 
         arena.update();
         for (int i= 0; i<4; i++)
         {
@@ -88,10 +75,7 @@ public class Graph
             }
             arena.update();
         }
-    arena.update();
-        
-        
-}
-       
+        arena.update();
+    }   
 
 }
