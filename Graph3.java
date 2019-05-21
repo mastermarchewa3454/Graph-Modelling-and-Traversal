@@ -30,9 +30,9 @@ public class Graph3
     private Directed direct = new Directed(4);
     private Ball[] ball = new Ball[5];
     private GInfo g = new GInfo();
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
 
-    public Graph3()
+    public Graph3(GameArena arena)
     {
         
         ball[0] = new Ball(400,150, g.getSizeBall(),g.getBallColor());
@@ -89,9 +89,5 @@ public class Graph3
             }
             arena.update();
         }
-    }
-    public static void main(String[] args)
-    {
-        Graph3 game = new Graph3();
     }
 }

@@ -634,6 +634,10 @@ public class GameArena
 		return arenaHeight;
 	}
 
+    public JFrame getJFrame()
+    {
+        return window;
+    }
 	/** 
 	 * Determines if the user is currently pressing the cursor up button.
 	 * @return true if the up button is pressed, false otherwise.

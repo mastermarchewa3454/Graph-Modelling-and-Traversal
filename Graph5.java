@@ -30,13 +30,14 @@ public class Graph5
     private Ball[] ball = new Ball[10];
     private Text[] text = new Text[6];
     private LinkedList<Arrow> lineList = new LinkedList<Arrow>();
+    private GInfo g = new GInfo();
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
+    private Directed direct = new Directed(6);
+    private Depth depth = new Depth (6);
 
-    public Graph5()
+    public Graph5(GameArena arena)
     {
-        GInfo g = new GInfo();
-        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
-        Directed direct = new Directed(6);
-        Depth depth = new Depth (6);
+        
         
         ball[0] = new Ball(500,180, g.getSizeBall(),g.getBallColor());
         ball[1] = new Ball(125,220, g.getSizeBall(),g.getBallColor());
@@ -129,12 +130,5 @@ public class Graph5
         */
         
     }
-
-    public static void main(String[] args)
-    {
-        Graph5 game = new Graph5();
-    }
-
-
     
 }

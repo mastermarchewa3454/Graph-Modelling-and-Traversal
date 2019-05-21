@@ -31,14 +31,13 @@ public class Graph2
     private Line[][] line = new Line[5][5];
     private Text[] text = new Text[5];
     private LinkedList<Line> lineList = new LinkedList<Line>();
-
+    private GInfo g = new GInfo();
+    private UnDirected un = new UnDirected();
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
     
 
-    public Graph2()
+    public Graph2(GameArena arena)
     {
-        GInfo g = new GInfo();
-        UnDirected un = new UnDirected();
-        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
         ball[0] = new Ball(500,250, g.getSizeBall() ,g.getBallColor());
         ball[1] = new Ball(750,400, g.getSizeBall() ,g.getBallColor());
         ball[2] = new Ball(400,650, g.getSizeBall() ,g.getBallColor()); 
@@ -86,10 +85,6 @@ public class Graph2
             arena.update();
         }
         
-    }
-    public static void main(String[] args)
-    {
-        Graph2 game = new Graph2();
     }
         
 }

@@ -29,12 +29,12 @@ public class Graph4
 {
     private Ball[] ball = new Ball[10];
     private Text[] text = new Text[5];
-    
+    private GInfo g = new GInfo();
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
 
-    public Graph4()
+    public Graph4(GameArena arena)
     {
-        GInfo g = new GInfo();
-        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+        
         ball[0] = new Ball(450,200, g.getSizeBall(),g.getBallColor());
         ball[1] = new Ball(675,400, g.getSizeBall(),g.getBallColor());
         ball[2] = new Ball(450,700, g.getSizeBall() ,g.getBallColor()); 
@@ -70,9 +70,5 @@ public class Graph4
             arena.update();
         }
         
-    }
-    public static void main(String[] args)
-    {
-        Graph4 game = new Graph4();
     }
 }
