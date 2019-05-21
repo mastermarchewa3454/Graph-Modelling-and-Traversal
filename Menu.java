@@ -16,15 +16,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import com.sun.glass.ui.Application;
+
 import javax.swing.*;  
-public class Menu  
+public class Menu implements ActionListener 
 {  
    // Graph graph = new Graph();
    // Graph2 graph2 = new Graph2();
-    
-
-    JButton graph2Button = new JButton ("Show graph2");
-
+   private JFrame window;
+   JFrame f= new JFrame("Graph Traversal"); 
+   JMenuBar mb=new JMenuBar();  
+    JButton graphButton = new JButton (new ImageIcon ("D:\\Study\\SoftwareDevelopment\\GraphProject\\GameArena-master\\Graph1.png"));
+    JButton graph2Button = new JButton (new ImageIcon ("D:\\Study\\SoftwareDevelopment\\GraphProject\\GameArena-master\\Graph2.png"));
 
     public Menu()
     {
@@ -33,32 +36,16 @@ public class Menu
         intro.setLocation(80, 10);
         intro.setFont(new Font("Serif", Font.BOLD, 28));
 
-        JButton graphButton = new JButton (new ImageIcon ("D:\\Study\\SoftwareDevelopment\\GraphProject\\GameArena-master\\Graph1.png"));
+       
         graphButton.setBounds(225,70,185,65);
-        graphButton.addActionListener(new ActionListener()
-        {
-        public void actionPerformed(ActionEvent e)
-        {
-            ;
-        }
-        }); 
-        
-        JButton graph2Button = new JButton (new ImageIcon ("D:\\Study\\SoftwareDevelopment\\GraphProject\\GameArena-master\\Graph2.png"));
+        graphButton.addActionListener(this);
+ 
         graph2Button.setBounds(225,160,185,65);
-        graph2Button.addActionListener(new ActionListener()
-        {
-        public void actionPerformed(ActionEvent e)
-        {
-            ;
-        }
-        }); 
-        
-
-          JFrame f= new JFrame("Graph Traversal");
-            
-          JMenuBar mb=new JMenuBar();   
+        graph2Button.addActionListener(this);
+                   
           f.setJMenuBar(mb);  
           f.setSize(700,700);
+          f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           f.add(intro);
           f.add(graphButton);
           f.add(graph2Button);   
@@ -69,12 +56,29 @@ public class Menu
           // background.add(graphButton);
           f.setResizable(false);
           f.setVisible(true);
-          
         
 
+        
+    } 
+    public void actionPerformed(ActionEvent e)
+        {
+            JButton b = (JButton) e.getSource();
 
+                if(b == graphButton)
+                {       
+                    Graph graph = new Graph();
+                }
+                
+                if(b == graph2Button)
+                {
+                    Graph2 graph2 = new Graph2();
+                    
+                }
 
-    }  
+               
+        }
+    
+
 public static void main(String args[])  
     {  
         Menu menu = new Menu();

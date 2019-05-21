@@ -36,14 +36,14 @@ public class Graph5
         GInfo g = new GInfo();
         GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
         Directed direct = new Directed(6);
-
+        Depth depth = new Depth (6);
+        
         ball[0] = new Ball(500,180, g.getSizeBall(),g.getBallColor());
         ball[1] = new Ball(125,220, g.getSizeBall(),g.getBallColor());
         ball[2] = new Ball(775,230, g.getSizeBall(),g.getBallColor());
         ball[3] = new Ball(125,720, g.getSizeBall() ,g.getBallColor());
         ball[4] = new Ball(450,680, g.getSizeBall() ,g.getBallColor());
         ball[5] = new Ball(775,710, g.getSizeBall() ,g.getBallColor());
-
 
         ball[6] = new Ball(810,710, g.getSizeBall() ,g.getTextColor());
         ball[7] = new Ball(810,710, g.getSizeBall()-5 ,g.getBall2Color());
@@ -64,9 +64,12 @@ public class Graph5
         direct.directedLink(ball[2],ball[4], arena);
         direct.directedLink(ball[2],ball[0], arena);
         direct.directedLink(ball[4],ball[1], arena);
-        direct.directedLink(ball[4],ball[2], arena);
         direct.directedLink(ball[4],ball[3], arena);
         direct.directedLink(ball[4],ball[5], arena);
+
+        Line line55 = new Line (ball[5].getXPosition()+20, ball[5].getYPosition()-31, ball[5].getXPosition()+28, ball[5].getYPosition()-50, g.getWidthLine(), g.getTextColor());
+        Line line555 = new Line (ball[5].getXPosition()+20, ball[5].getYPosition()-31, ball[5].getXPosition()+40, ball[5].getYPosition()-20, g.getWidthLine(), g.getTextColor());
+        
 
         for (int i=0; i<=5; i++)
         {
@@ -76,6 +79,9 @@ public class Graph5
             
             arena.update();
         }
+        arena.addLine(line55);
+        arena.addLine(line555);
+        arena.update();
 
         direct.addEdge(0,1);
         direct.addEdge(0,2);
@@ -83,15 +89,31 @@ public class Graph5
         direct.addEdge(2,4);
         direct.addEdge(2,0);
         direct.addEdge(4,1);
-        direct.addEdge(4,2);
         direct.addEdge(4,3);
         direct.addEdge(4,5);
         direct.addEdge(5,5);
-        System.out.println("Breadth First Traversal (started from 4)");
-        direct.BreadthFirst(4, ball, arena);
+        System.out.println("Breadth First Traversal (started from 2)");
+        direct.BreadthFirst(2, ball, arena);
         arena.update();
 
+        for (int i=0; i<=5; i++)
+        {
+            ball[i].setColour(g.getBallColor());
+        }
+        arena.update();
 
+        depth.addEdge(0,1);
+        depth.addEdge(0,2);
+        depth.addEdge(1,3);
+        depth.addEdge(2,4);
+        depth.addEdge(2,0);
+        depth.addEdge(4,1);
+        depth.addEdge(4,3);
+        depth.addEdge(4,5);
+        depth.addEdge(5,5);
+        System.out.println("\nDepth First Traversal (started from 2)");
+        depth.DepthFirst(2, arena, ball);
+        arena.update();
 
         /*
         Arrow arrow01 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);

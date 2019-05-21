@@ -117,8 +117,9 @@ public class GameArena
             window.setContentPane(jfxPanel);
             window.setResizable(false);
             window.pack();
-            window.setVisible(true);
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setVisible(true);
+           
         }
 
         root = new Group();

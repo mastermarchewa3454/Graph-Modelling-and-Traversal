@@ -31,14 +31,14 @@ public class Graph
     
     private Ball[] ball = new Ball[5];
     private LinkedList<Line> lineList = new LinkedList<Line>();
-
-    
-    
-    public Graph()
-    {
         GInfo g = new GInfo();
         UnDirected un = new UnDirected();
-        GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
+ 
+    public Graph()
+    {
+        
+        
         ball[0] = new Ball(400,400, g.getSizeBall() ,g.getBallColor());
         ball[1] = new Ball(600,400, g.getSizeBall() ,g.getBallColor());
         ball[2] = new Ball(400,600, g.getSizeBall() ,g.getBallColor()); 
@@ -89,13 +89,19 @@ public class Graph
             }
             arena.update();
         }
+    arena.update();
         
-    }
     
-
+    
+   
+            
+          
+        
+}
+    
     public static void main(String[] args)
     {
         Graph game = new Graph();
-    }
+    }     
 
 }

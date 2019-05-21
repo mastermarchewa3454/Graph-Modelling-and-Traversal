@@ -9,6 +9,8 @@ public class GInfo
     private String ballColor = "#FF0000";
     private int forDouble = 10;
     private String ball2Color = "#000000";
+    private int recWidth = 350;
+    private int recHeight = 125;
 
     public int getWidthArena()
     {
@@ -45,6 +47,14 @@ public class GInfo
     public String getBall2Color()
     {
         return ball2Color;
+    }
+    public int getRecWidth()
+    {
+        return recWidth;
+    }
+    public int getRecHeight()
+    {
+        return recHeight;
     }
 
 }

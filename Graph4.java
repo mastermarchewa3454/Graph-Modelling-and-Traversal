@@ -29,6 +29,7 @@ public class Graph4
 {
     private Ball[] ball = new Ball[10];
     private Text[] text = new Text[5];
+    
 
     public Graph4()
     {

@@ -50,7 +50,7 @@ public class Directed extends Thread {
             Iterator<Integer> i = adj[s].listIterator();
             try 
             {
-                Thread.sleep(800);
+                Thread.sleep(1000);
                 b[s].setColour("#FFD700");
                 arena.update();
                 
