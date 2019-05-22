@@ -1,20 +1,21 @@
 import java.util.Scanner;
-import java.util.Arrays;
-import javax.lang.model.util.ElementScanner6;
-
-import java.util.*;
-
-
+/**
+ * This class provide a posibility to create Custom graph in which user is putting details of connection between balls.
+ * Combined with GameArena creates adjustable graph.
+ */
 public class Custom
 {
-    private Ball[] ball = new Ball[10];
-    private Text[] text = new Text[6];
-    private GInfo g = new GInfo();
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
-    private Directed direct = new Directed(20);
-    private UnDirected un = new UnDirected();
-    private Depth depth = new Depth (6);
+    private Ball[] ball = new Ball[10];                                                     // The list of balls which are shown on the screen in GameArena
+    private Text[] text = new Text[6];                                                      // The list of texts which are shown on the rectangles
+    private GInfo g = new GInfo();                                                          // The additional class which provides all the details connecting with program such as sizes of elements
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);  // The GameArena class to show the arena on which menu is set up
+    private Directed direct = new Directed(20);                                             // The class which provides direct connections between balls
+    private UnDirected un = new UnDirected();                                               // The class which provides undirect connections between balls
 
+    /**
+     * Function to print template of balls on the screen
+     * @param arena is used to setup graph on this arena
+     */
     public Custom(GameArena arena)
     {
         ball[0] = new Ball(500,180, g.getSizeBall(),g.getBallColor());
@@ -45,11 +46,15 @@ public class Custom
             arena.update();
         }
 
+
+        /**
+         * Scanning results of number of connections, index of balls and type of connection
+         * Depends on input of user it prints proper balls
+         */
+
         Scanner s = new Scanner(System.in);
         System.out.println("\nPut a number of connection");
-
         int length = s.nextInt();
-
         while(length!=0)
         {
             System.out.println("\nPut a balls between should be connections in pair");

@@ -4,50 +4,69 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import javafx.animation.Timeline;
 
-// This class represents a directed graph using adjacency list 
-// representation 
-public class Directed extends Thread {
-    private int V; // No. of vertices
+/**
+ * This class represents a directed graph using adjacency list  
+ *  */ 
+ 
+public class Directed extends Thread 
+{
+    private int x;                     // The edge from which edge is started
     private LinkedList<Integer> adj[]; // Adjacency Lists
-    private GInfo g = new GInfo();
+    private GInfo g = new GInfo();     // // The additional class which provides all the details connecting with program such as sizes of elements
 
-    // Constructor
-    Directed(int v) {
-        V = v;
-        adj = new LinkedList[v];
-        for (int i = 0; i < v; ++i)
+    /**
+     *  Constructor
+     */
+    public Directed(int x) {
+        x = x;
+        adj = new LinkedList[x];
+        for (int i = 0; i < x; ++i)
             adj[i] = new LinkedList();
     }
 
-    // Function to add an edge into the graph
-    void addEdge(int v, int w) {
+    /**
+     *  Function to add an edge into the graph
+     */ 
+    void addEdge(int x, int w) {
 
-        adj[v].add(w);
+        adj[x].add(w);
     }
 
-    // prints BFS traversal from a given source s
+
+    /**
+     *  Prints Breadth First traversal
+     * @param s given source
+     * @param b ball which are used for the Breadth First traversal
+     * @param arena is used to setup menu on this arena
+     */
+    
     void BreadthFirst(int s, Ball[] b, GameArena arena) {
 
-        // Mark all the vertices as not visited(By default
-        // set as false)
-        boolean visited[] = new boolean[V];
+        /**
+         *  Mark all the vertices as not done
+         *  Put an element in linkedlist
+        */
+        boolean done[] = new boolean[x];
         int j =0;
-        // Create a queue for BFS
+        
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
-        // Mark the current node as visited and enqueue it
-        visited[s] = true;
+
+        /**
+         * Mark the current node as done and enqueue it
+         */
+        done[s] = true;
         queue.add(s);
 
         while (queue.size() != 0) {
-            // Dequeue a vertex from queue and print it
             s = queue.poll();           
             System.out.print(s + " ");
-            
-            // Get all adjacent vertices of the dequeued vertex s 
-            // If a adjacent has not been visited, then mark it 
-            // visited and enqueue it 
             Iterator<Integer> i = adj[s].listIterator();
+
+
+            /**
+             * Sleep program to color the next ball
+             */
             try 
             {
                 Thread.sleep(1000);
@@ -55,17 +74,17 @@ public class Directed extends Thread {
                 arena.update();
                 
             }
-
-                catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+            catch (InterruptedException e) 
+            {
             e.printStackTrace();
-            }  
+            } 
+
             while (i.hasNext()) 
             { 
                 int n = i.next(); 
-                if (!visited[n]) 
+                if (!done[n]) 
                 { 
-                    visited[n] = true; 
+                    done[n] = true; 
                     queue.add(n); 
                    
                 }
@@ -74,10 +93,26 @@ public class Directed extends Thread {
         }
         
     }
+
+
+    /**
+     * Function to connect two balls using arrows in GameArena. It is used when directed links are needed.
+     * @param a the ball from which arrow is being made
+     * @param b the ball to which arrow is being made
+     * @param arena is used to setup menu on this arena
+     */
     public void directedLink(Ball a, Ball b, GameArena arena)
     {
         Arrow arrow = new Arrow (a.getXPosition(), a.getYPosition(), b.getXPosition(), b.getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
     }
+
+    /**
+     * Function to connect two balls using arrows in GameArena. It is used for custom graph.
+     * @param x index of first ball
+     * @param y index of second ball 
+     * @param arena is used to setup menu on this arena
+     * @param ball array of ball for setting up custom direct
+     */
     public void customDirect(int x, int y, GameArena arena, Ball [] ball)
     {
         Arrow arrow = new Arrow (ball[x].getXPosition(), ball[x].getYPosition(), ball[y].getXPosition(), ball[y].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);

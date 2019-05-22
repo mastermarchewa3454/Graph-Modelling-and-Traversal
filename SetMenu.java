@@ -1,10 +1,20 @@
+/**
+ * Creates a class to setup Menu. Combined with Start enable to show interactive menu
+ * on the screen.
+ */
 public class SetMenu
     {
-        private GInfo g = new GInfo();
-        private Rectangle[] rec = new Rectangle[8];
-        private Text[] text = new Text[8];
-        private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
+        private GInfo g = new GInfo();                                                          // The additional class which provides all the details connecting with program such as sizes of elements
+        private Rectangle[] rec = new Rectangle[8];                                             // The reclangles which are used as buttons to go to other graphs
+        private Text[] text = new Text[8];                                                      // The list of texts which are shown on the rectangles
+        private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);  // The GameArena class to show the arena on which menu is set up
 
+        /**
+         * Print rectangles and texts on the screen
+         * @param arena is used to setup menu on this arena
+         * @param rec - get rectangles instances
+         * @param text - get text instances
+         */
         public void SetMenu(GameArena arena, Rectangle [] rec, Text[] text)
         {
         Text textintro = new Text("Choose the graph you would like to see",50,100,45, g.getTextColor() );

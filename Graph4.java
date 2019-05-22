@@ -1,37 +1,18 @@
-import java.util.*;
-import java.util.Collections;
-import java.util.concurrent.locks.*;
-import javafx.scene.input.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JWindow;
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-import javax.swing.SwingUtilities;
-import javafx.application.Platform;
-import javafx.animation.AnimationTimer;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.*;
-import javafx.scene.*;
-import javafx.scene.paint.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-
-
+/**
+ * This class provide a posibility to create Graph.
+ */
 public class Graph4
 {
-    private Ball[] ball = new Ball[10];
-    private Text[] text = new Text[5];
-    private GInfo g = new GInfo();
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
+    private Ball[] ball = new Ball[10];                                                      // The instances of ball from the class which are shown in GameArena
+    private Text[] text = new Text[5];                                                       // The list of texts which are shown on the rectangles
+    private GInfo g = new GInfo();                                                           // The additional class which provides all the details connecting with program such as sizes of elements
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);   // The GameArena class to show the arena on which menu is set up
+    private Directed direct = new Directed(8);                                               // The class which provides direct connections between balls
 
+    /**
+     * Function to print template of balls, texts and connections on the screen
+     * @param arena is used to setup graph on this arena
+     */
     public Graph4(GameArena arena)
     {
         
@@ -54,13 +35,14 @@ public class Graph4
         text[2] = new Text("M",ball[2].getXPosition(),ball[2].getYPosition(), g.getTextSize(), g.getTextColor() );
         text[3] = new Text("L",ball[3].getXPosition(),ball[3].getYPosition(), g.getTextSize(), g.getTextColor() );
        
-        Arrow arrowKK = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowLL = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowLJ = new Arrow (ball[3].getXPosition(), ball[3].getYPosition(), ball[0].getXPosition(), ball[0].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowML = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowKM = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowJK = new Arrow (ball[0].getXPosition()+g.getForDouble(), ball[0].getYPosition()-g.getForDouble(), ball[1].getXPosition()+g.getForDouble(), ball[1].getYPosition()-g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrowKJ = new Arrow (ball[1].getXPosition()-g.getForDouble(), ball[1].getYPosition()+g.getForDouble(), ball[0].getXPosition()-g.getForDouble(), ball[0].getYPosition()+g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
+        direct.directedLink(ball[1],ball[2], arena);
+        direct.directedLink(ball[3],ball[3], arena);
+        direct.directedLink(ball[3],ball[0], arena);
+        direct.directedLink(ball[2],ball[3], arena);
+        direct.directedLink(ball[1],ball[2], arena);
+        direct.directedLink(ball[0],ball[1], arena);
+        direct.directedLink(ball[1],ball[0], arena);
+    
         arena.update();
 
         for (int i= 0; i<4; i++)

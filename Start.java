@@ -1,35 +1,22 @@
-import java.awt.EventQueue;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-
-import com.sun.glass.ui.Application;
-
-import javax.swing.*; 
-
-
+/**
+ * This class provides a main menu for the program in which graphics are drawn
+ * Combined with GameArena, Text, SetMenu enable to create menu
+ */
 public class Start
 {
-    private GInfo g = new GInfo();
-    private Rectangle[] rec = new Rectangle[8];
-    private Text[] text = new Text[8];
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);
-    private Rectangle cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color());
-    private SetMenu menu = new SetMenu(); 
-    private int[] isExist = new int[10];
+    private GInfo g = new GInfo();                                                                                                             // The additional class which provides all the details connecting with program such as sizes of elements
+    private Rectangle[] rec = new Rectangle[8];                                                                                                // The reclangles which are used as buttons to go to other graphs
+    private Text[] text = new Text[8];                                                                                                         // The list of texts which are shown on the rectangles
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), true);                                                      // The GameArena class to show the arena on which menu is set up
+    private Rectangle cov = new Rectangle(g.getWidthArena()/2, g.getHeightArena()/2,g.getWidthArena(), g.getHeightArena(), g.getBall2Color()); // The black cover for gamearena
+    private SetMenu menu = new SetMenu();                                                                                                      // The additional class which sets elements (Rectangles, Text) on the screen
+    private int[] isExist = new int[10];                                                                                                       // The integer which enable/disable actual graph
+    /**
+     *
+     * Constructor. Create a new instance of a Start.
+     *
+     */
     public Start()
     {
         menu.SetMenu(arena, rec, text);
@@ -39,6 +26,9 @@ public class Start
             {
                 isExist[i] = 0;
             }
+    /**
+     * This loop execute moving to other graph by replacing Start page with the page depends on the graph
+    */
         while(true)
         {
             arena.update();
@@ -109,18 +99,21 @@ public class Start
                 arena.update();
             }
 
+
+            /**
+             * The ability to close the program using space button
+             */
             else if(arena.spacePressed())
             {
                 arena.exit();
-            }
-            
+            }    
         }        
-
-        
-
-
     }
-   
+
+
+    /**
+     * Main function. Creates new instance of class Start.    
+     */   
     public static void main(String[] args)
     {
         Start game = new Start();

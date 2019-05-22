@@ -1,40 +1,18 @@
-import java.util.*;
-import java.util.Collections;
-import java.util.concurrent.locks.*;
-import javafx.scene.input.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JWindow;
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-import javax.swing.SwingUtilities;
-import javafx.application.Platform;
-import javafx.animation.AnimationTimer;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.*;
-import javafx.scene.*;
-import javafx.scene.paint.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-
-
-
+/**
+ * This class provide a posibility to create Graph.
+ */
 public class Graph
 {
     
-    private Ball[] ball = new Ball[5];
-    private LinkedList<Line> lineList = new LinkedList<Line>();
-    private GInfo g = new GInfo();
-    private UnDirected un = new UnDirected();
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
- 
+    private Ball[] ball = new Ball[5];                                                      // The instances of ball from the class which are shown in GameArena
+    private GInfo g = new GInfo();                                                          // The additional class which provides all the details connecting with program such as sizes of elements
+    private UnDirected un = new UnDirected();                                               // The class which provides undirect connections between balls
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);  // The GameArena class to show the arena on which menu is set up
+   
+    /**
+     * Function to print template of balls, texts and connections on the screen
+     * @param arena is used to setup graph on this arena
+     */
     public Graph(GameArena arena)
     {
         

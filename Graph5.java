@@ -1,44 +1,18 @@
-import java.util.*;
-import java.util.Collections;
-import java.util.concurrent.locks.*;
-import javafx.scene.input.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JWindow;
-import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-import javax.swing.SwingUtilities;
-import javafx.application.Platform;
-import javafx.animation.AnimationTimer;
-import javafx.embed.swing.JFXPanel;
-import javafx.event.*;
-import javafx.scene.*;
-import javafx.scene.paint.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-
-
 public class Graph5
 {
-    private Ball[] ball = new Ball[10];
-    private Text[] text = new Text[6];
-    private LinkedList<Arrow> lineList = new LinkedList<Arrow>();
-    private GInfo g = new GInfo();
-    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);
-    private Directed direct = new Directed(6);
-    private Depth depth = new Depth (6);
+    private Ball[] ball = new Ball[10];                                                     // The instances of ball from the class which are shown in GameArena
+    private Text[] text = new Text[6];                                                      // The list of texts which are shown on the rectangles
+    private GInfo g = new GInfo();                                                          // The additional class which provides all the details connecting with program such as sizes of elements
+    private GameArena arena = new GameArena(g.getWidthArena(), g.getHeightArena(), false);  // The GameArena class to show the arena on which menu is set up
+    private Directed direct = new Directed(6);                                              // The class which provides direct connections between balls and BreathFirstTraversal for the graph
+    private Depth depth = new Depth (6);                                                    // The class which provides DepthFirstTraversal for the graph
 
+    /**
+     * Function to print template of balls, texts and connections on the screen
+     * @param arena is used to setup graph on this arena
+     */
     public Graph5(GameArena arena)
     {
-        
-        
         ball[0] = new Ball(500,180, g.getSizeBall(),g.getBallColor());
         ball[1] = new Ball(125,220, g.getSizeBall(),g.getBallColor());
         ball[2] = new Ball(775,230, g.getSizeBall(),g.getBallColor());
@@ -58,7 +32,6 @@ public class Graph5
         text[4] = new Text("4",ball[4].getXPosition(),ball[4].getYPosition(), g.getTextSize(), g.getTextColor() );
         text[5] = new Text("5",ball[5].getXPosition(),ball[5].getYPosition(), g.getTextSize(), g.getTextColor() );
 
-        
         direct.directedLink(ball[0],ball[1], arena);
         direct.directedLink(ball[0],ball[2], arena);
         direct.directedLink(ball[1],ball[3], arena);
@@ -71,7 +44,6 @@ public class Graph5
         Line line55 = new Line (ball[5].getXPosition()+20, ball[5].getYPosition()-31, ball[5].getXPosition()+28, ball[5].getYPosition()-50, g.getWidthLine(), g.getTextColor());
         Line line555 = new Line (ball[5].getXPosition()+20, ball[5].getYPosition()-31, ball[5].getXPosition()+40, ball[5].getYPosition()-20, g.getWidthLine(), g.getTextColor());
         
-
         for (int i=0; i<=5; i++)
         {
             arena.addBall(ball[i]);
@@ -84,6 +56,11 @@ public class Graph5
         arena.addLine(line555);
         arena.update();
 
+        /**
+         * Adding all edges to direct in order to process Breadth First Traversal
+         * Based on this edges, Breadth First Traversal is executed
+         * In BreadthFirst there is an option to choose starting ball
+         */
         direct.addEdge(0,1);
         direct.addEdge(0,2);
         direct.addEdge(1,3);
@@ -93,16 +70,24 @@ public class Graph5
         direct.addEdge(4,3);
         direct.addEdge(4,5);
         direct.addEdge(5,5);
-        System.out.println("Breadth First Traversal (started from 2)");
+        System.out.println("Breadth First Traversal, started from 2");
         direct.BreadthFirst(2, ball, arena);
         arena.update();
 
+        /**
+         * Setting color of the ball to default before traversal
+         */
         for (int i=0; i<=5; i++)
         {
             ball[i].setColour(g.getBallColor());
         }
         arena.update();
 
+        /**
+         * Adding all edges to direct in order to process Depth First Traversal
+         * Based on this edges, Depth First Traversal is executed
+         * In DepthFirst there is an option to choose starting ball
+         */
         depth.addEdge(0,1);
         depth.addEdge(0,2);
         depth.addEdge(1,3);
@@ -112,23 +97,8 @@ public class Graph5
         depth.addEdge(4,3);
         depth.addEdge(4,5);
         depth.addEdge(5,5);
-        System.out.println("\nDepth First Traversal (started from 2)");
+        System.out.println("\nDepth First Traversal, started from 2");
         depth.DepthFirst(2, arena, ball);
         arena.update();
-
-        /*
-        Arrow arrow01 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow02 = new Arrow (ball[0].getXPosition(), ball[0].getYPosition()-g.getForDouble(), ball[2].getXPosition(), ball[2].getYPosition()-g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow13 = new Arrow (ball[1].getXPosition(), ball[1].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow24 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition(), ball[4].getXPosition(), ball[4].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow20 = new Arrow (ball[2].getXPosition(), ball[2].getYPosition()+g.getForDouble(), ball[0].getXPosition(), ball[0].getYPosition()+g.getForDouble(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow41 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[1].getXPosition(), ball[1].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow42 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[2].getXPosition(), ball[2].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow43 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[3].getXPosition(), ball[3].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow45 = new Arrow (ball[4].getXPosition(), ball[4].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        Arrow arrow55 = new Arrow (ball[5].getXPosition(), ball[5].getYPosition(), ball[5].getXPosition(), ball[5].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
-        */
-        
     }
-    
 }

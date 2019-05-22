@@ -1,48 +1,63 @@
 import java.io.*; 
 import java.util.*; 
-  
-// This class represents a directed graph using adjacency list 
-// representation 
+/**
+ * This class represents a directed graph using adjacency list 
+*/ 
 public class Depth 
 { 
-    private int V;   // No. of vertices 
-  
-    // Array  of lists for Adjacency List Representation 
-    private LinkedList<Integer> adj[]; 
-  
-    // Constructor 
-    Depth(int v) 
+    private int x;   // No. of vertices 
+    private LinkedList<Integer> adj[]; // Array  of lists for Adjacency List Representation 
+
+
+    /**
+     * Constructor 
+     */
+    public Depth(int x) 
     { 
-        V = v; 
-        adj = new LinkedList[v]; 
-        for (int i=0; i<v; ++i) 
+        x = x; 
+        adj = new LinkedList[x]; 
+        for (int i=0; i<x; ++i) 
             adj[i] = new LinkedList(); 
     } 
-  
-    //Function to add an edge into the graph 
-    void addEdge(int v, int w) 
+
+
+    /**
+     * Function to add an edge into the graph
+     * @param x is parameter used for putting a number of first ball
+     * @param y is parameter used for putting a number of second ball
+     * 
+     */
+    void addEdge(int x, int y) 
     { 
-        adj[v].add(w);  // Add w to v's list. 
+        adj[x].add(y);
     } 
   
-    // A function used by DFS 
-    void DFSUtil(int v,boolean visited[], GameArena arena, Ball[] b) 
+    
+    /**
+     * This function first mark current node and print it
+     * Then recuring for all the vertices adjacent to vertex
+     * @param x the index of elements which are shown on the screen in array
+     * @param done decide if element was done or not
+     * @param arena is used to setup menu on this arena
+     * @param b array of ball for which DepthTraversal is being executed
+     */ 
+    void Execute(int x,boolean done[], GameArena arena, Ball[] b) 
     { 
-        // Mark the current node as visited and print it 
-        visited[v] = true; 
-        System.out.print(v+" "); 
-  
-        // Recur for all the vertices adjacent to this vertex 
-        Iterator<Integer> i = adj[v].listIterator();
+        done[x] = true; 
+        System.out.print(x+" "); 
+        Iterator<Integer> i = adj[x].listIterator();
         try 
             {
+             /**
+             * Sleep program to color the next ball
+             */
                 Thread.sleep(1000);
-                b[v].setColour("#FFD700");
+                b[x].setColour("#FFD700");
                 arena.update();
             }
 
                 catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+           
             e.printStackTrace();
             }
             
@@ -50,19 +65,22 @@ public class Depth
         while (i.hasNext()) 
         { 
             int n = i.next(); 
-            if (!visited[n]) 
-                DFSUtil(n, visited, arena, b); 
+            if (!done[n]) 
+                Execute(n, done, arena, b); 
         } 
     } 
-  
-    // The function to do DFS traversal. It uses recursive DFSUtil() 
-    void DepthFirst(int v, GameArena arena, Ball[] b ) 
-    { 
-        // Mark all the vertices as not visited(set as 
-        // false by default in java) 
-        boolean visited[] = new boolean[V]; 
-  
-        // Call the recursive helper function to print DFS traversal 
-        DFSUtil(v, visited, arena, b); 
+    
+    /**
+     * The execute function of program
+     * Marking all the vertices as default
+     * Using recursivion, print DepthFirst
+     * @param x number from whih depth first should start
+     * @param arena is used to setup menu on this arena
+     * @param b ball which are used for the Depth First traversal
+     */
+    void DepthFirst(int x, GameArena arena, Ball[] b ) 
+    {  
+        boolean done[] = new boolean[x]; 
+        Execute(x, done, arena, b); 
     }
 } 
