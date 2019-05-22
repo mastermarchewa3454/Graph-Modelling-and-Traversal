@@ -10,26 +10,26 @@ import javafx.animation.Timeline;
  
 public class Directed extends Thread 
 {
-    private int x;                     // The edge from which edge is started
+    private int V;                     // The edge from which edge is started
     private LinkedList<Integer> adj[]; // Adjacency Lists
     private GInfo g = new GInfo();     // // The additional class which provides all the details connecting with program such as sizes of elements
 
     /**
      *  Constructor
      */
-    public Directed(int x) {
-        x = x;
-        adj = new LinkedList[x];
-        for (int i = 0; i < x; ++i)
+    Directed(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
             adj[i] = new LinkedList();
     }
 
     /**
      *  Function to add an edge into the graph
      */ 
-    void addEdge(int x, int w) {
+    void addEdge(int v, int w) {
 
-        adj[x].add(w);
+        adj[v].add(w);
     }
 
 
@@ -44,17 +44,19 @@ public class Directed extends Thread
 
         /**
          *  Mark all the vertices as not done
-         *  Put an element in linkedlist
         */
-        boolean done[] = new boolean[x];
-        int j =0;
         
+        
+        boolean done[] = new boolean[V];
+        int j =0;
+        // Create a queue for BFS
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
 
         /**
          * Mark the current node as done and enqueue it
          */
+         
         done[s] = true;
         queue.add(s);
 
@@ -74,11 +76,11 @@ public class Directed extends Thread
                 arena.update();
                 
             }
-            catch (InterruptedException e) 
-            {
-            e.printStackTrace();
-            } 
 
+                catch (InterruptedException e) 
+                {
+            e.printStackTrace();
+            }  
             while (i.hasNext()) 
             { 
                 int n = i.next(); 
