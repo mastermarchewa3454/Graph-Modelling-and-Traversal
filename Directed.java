@@ -78,4 +78,8 @@ public class Directed extends Thread {
     {
         Arrow arrow = new Arrow (a.getXPosition(), a.getYPosition(), b.getXPosition(), b.getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
     }
+    public void customDirect(int x, int y, GameArena arena, Ball [] ball)
+    {
+        Arrow arrow = new Arrow (ball[x].getXPosition(), ball[x].getYPosition(), ball[y].getXPosition(), ball[y].getYPosition(), g.getWidthLine(), g.getTextColor(), arena);
+    }
 }
